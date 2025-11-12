@@ -1,0 +1,70 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| bca                |
+| information_schema |
+| mca                |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
++--------------------+
+7 rows in set (0.01 sec)
+
+mysql> use mca;
+Database changed
+mysql> SHOW TABLES FROM mca;
++---------------+
+| Tables_in_mca |
++---------------+
+| student       |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> create table parents(pid int (10),name varchar (20),city varchar (20),contact varchar(10));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> select *from student;
++------+----------+----------+------------+
+| sid  | name     | city     | contact    |
++------+----------+----------+------------+
+|    1 | shraddha | kolhapur | 2004-09-15 |
++------+----------+----------+------------+
+1 row in set (0.02 sec)
+
+mysql> insert into parents values(1,"usha","kolhapur","99887766");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> alter table student rename column contact to DOB;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select *from student;
++------+----------+----------+------------+
+| sid  | name     | city     | DOB        |
++------+----------+----------+------------+
+|    1 | shraddha | kolhapur | 2004-09-15 |
++------+----------+----------+------------+
+1 row in set (0.00 sec)
+
+mysql> select *from parents;
++------+------+----------+----------+
+| pid  | name | city     | contact  |
++------+------+----------+----------+
+|    1 | usha | kolhapur | 99887766 |
++------+------+----------+----------+
+1 row in set (0.00 sec)
+
+mysql> alter table parents rename column pid to sid;
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select student.sid,parents.name,student.city from student inner join parents on student.sid = parents.sid;
++------+------+----------+
+| sid  | name | city     |
++------+------+----------+
+|    1 | usha | kolhapur |
++------+------+----------+
+1 row in set (0.00 sec)
+
