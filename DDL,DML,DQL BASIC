@@ -1,0 +1,82 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+mysql> create database mca;
+Query OK, 1 row affected (0.01 sec)
+mysql> use mca;
+Database changed
+mysql> create table student(sid int (10),name varchar (20),city varchar (20),dob date);
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> describe student;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | YES  |     | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| city  | varchar(20) | YES  |     | NULL    |       |
+| dob   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into student values(1,"shraddha","kolhapur",'2004-09-15');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> alter table student add (contact varchar(10));
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update student set contact ="2020202345" where sid=1;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+mysql> select *from student;
++------+----------+----------+------------+------------+
+| sid  | name     | city     | dob        | contact    |
++------+----------+----------+------------+------------+
+|    1 | shraddha | kolhapur | 2004-09-15 | 2020202345 |
++------+----------+----------+------------+------------+
+1 row in set (0.00 sec)
+
+mysql> alter table student drop column dob;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe student;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| sid     | int         | YES  |     | NULL    |       |
+| name    | varchar(20) | YES  |     | NULL    |       |
+| city    | varchar(20) | YES  |     | NULL    |       |
+| contact | varchar(10) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select *from student;
++------+----------+----------+------------+
+| sid  | name     | city     | contact    |
++------+----------+----------+------------+
+|    1 | shraddha | kolhapur | 2020202345 |
+|    1 | shraddha | kolhapur | 2004-09-15 |
++------+----------+----------+------------+
+2 rows in set (0.00 sec)
+
+mysql> delete from student where sid='1' limit 1;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select *from student;
++------+----------+----------+------------+
+| sid  | name     | city     | contact    |
++------+----------+----------+------------+
+|    1 | shraddha | kolhapur | 2004-09-15 |
++------+----------+----------+------------+
+1 row in set (0.00 sec)
+
